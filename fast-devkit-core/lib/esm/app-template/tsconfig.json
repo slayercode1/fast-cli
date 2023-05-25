@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "emitDecoratorMetadata": true,
+    "lib": ["es5", "es6", "dom"],
+    "target": "es2017",
+    "module": "commonjs",
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "outDir": "./prod",
+    "allowJs": true,
+    "sourceMap": false,
+    "resolveJsonModule": true
+  },
+  "include": ["index.ts", "src/**/*", "logger.ts", "cors/**/*"],
+  "exclude": ["node_modules", "prod"]
+}
