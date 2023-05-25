@@ -11,7 +11,7 @@
     "outDir": "./prod",
     "allowJs": true,
     "sourceMap": false,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
   },
   "include": ["index.ts", "src/**/*", "logger.ts", "cors/**/*"],
   "exclude": ["node_modules", "prod"]

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DecorateBaseEntity = exports.BodyCorps = exports.Put = exports.Delete = exports.Post = exports.Patch = exports.Get = exports.Controller = exports.configureRoutes = void 0;
+exports.BaseEntity = exports.BodyCorps = exports.Put = exports.Delete = exports.Post = exports.Patch = exports.Get = exports.Controller = exports.configureRoutes = void 0;
 const controller_1 = require("./controller");
 Object.defineProperty(exports, "configureRoutes", { enumerable: true, get: function () { return controller_1.configureRoutes; } });
 Object.defineProperty(exports, "Controller", { enumerable: true, get: function () { return controller_1.Controller; } });
@@ -11,5 +11,5 @@ Object.defineProperty(exports, "Post", { enumerable: true, get: function () { re
 Object.defineProperty(exports, "Delete", { enumerable: true, get: function () { return decorator_1.Delete; } });
 Object.defineProperty(exports, "Put", { enumerable: true, get: function () { return decorator_1.Put; } });
 Object.defineProperty(exports, "BodyCorps", { enumerable: true, get: function () { return decorator_1.BodyCorps; } });
-const index_1 = require("./baseEntity/index");
-Object.defineProperty(exports, "DecorateBaseEntity", { enumerable: true, get: function () { return index_1.DecorateBaseEntity; } });
+const base_entity_1 = require("./Entity/base-entity");
+Object.defineProperty(exports, "BaseEntity", { enumerable: true, get: function () { return base_entity_1.BaseEntity; } });
