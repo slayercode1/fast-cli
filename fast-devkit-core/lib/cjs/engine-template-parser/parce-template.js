@@ -4,10 +4,11 @@ exports.createDirectoryContentsModels = void 0;
 const fs_1 = require("fs");
 const path_1 = require("path");
 const compiler_template_1 = require("./compiler-template");
+const ansi_colors_1 = require("ansi-colors");
 const CURR_DIR = process.cwd();
 function createDirectoryContentsModels(templatePath, newProjectPath, setVariable) {
     const filesToCreate = (0, fs_1.readdirSync)(templatePath);
-    filesToCreate.forEach(file => {
+    filesToCreate.forEach((file) => {
         const origFilePath = (0, path_1.join)(templatePath, file);
         const stats = (0, fs_1.statSync)(origFilePath);
         if (stats.isFile()) {
@@ -15,6 +16,7 @@ function createDirectoryContentsModels(templatePath, newProjectPath, setVariable
             const convertedContent = (0, compiler_template_1.templateEngine)(fileContent, setVariable);
             const writePath = (0, path_1.join)(CURR_DIR, newProjectPath, (0, compiler_template_1.changeFileExtension)(file, '.ts'));
             (0, fs_1.writeFileSync)(writePath, convertedContent, 'utf8');
+            console.log(ansi_colors_1.green.bold.underline('Fichier créé: ') + (0, path_1.basename)(writePath));
         }
         else if (stats.isDirectory()) {
             if ((0, fs_1.existsSync)(`${CURR_DIR}/${newProjectPath}/${file}`)) {

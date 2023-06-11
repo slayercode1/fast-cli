@@ -10,9 +10,12 @@
     "pretty": true,
     "moduleResolution": "node"
   },
+  "include": [
+      "index.ts"
+  ],
   "exclude": [
     "node_modules",
     "cli",
-    "interface.ts"
+    "./interface.ts"
   ]
 }

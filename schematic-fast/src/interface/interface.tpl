@@ -1,1 +1,1 @@
-export interface {{title}} {}
+export interface {{titleInterface}} {}

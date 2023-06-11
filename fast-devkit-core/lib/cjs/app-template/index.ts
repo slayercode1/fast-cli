@@ -6,10 +6,10 @@ import helmet from 'helmet';
 import { logger } from './logger';
 import cors from 'cors';
 import corsOptions from './cors/waitlist';
+import { configureRoutes } from '@ghost_/fast-utils';
 import { initializeDatabase } from './src/config/database';
 import limiter from './limiter';
-import { configureRoutes } from '@fast/utils';
-import errorHandler from './src/middlewares/handlers-errors';
+import { ExampleController } from './src/resources/controller';
 
 config();
 const app = express();
@@ -21,11 +21,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(limiter);
-app.use(cors(corsOptions));
-app.use(errorHandler);
+// app.use(cors(corsOptions));
+// app.use()
 
 initializeDatabase();
-configureRoutes(app, []);
+configureRoutes(app, [ExampleController]);
 
 server.listen(PORT, () => {
   logger.info('This server is running');

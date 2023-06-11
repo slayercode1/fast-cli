@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
-import { Controller, Get, Post, Patch, Delete } from '@fast/utils';
+import { Controller, Get, Post, Patch, Delete } from '@ghost_/fast-utils';
 
-@Controller('/user')
-export default class UserController {
+@Controller('/{{nameRoute}}')
+export default class {{titleClass}}Controller {
   @Get('/')
   public find(req: Request, res: Response) {
     return res.send('User overview');

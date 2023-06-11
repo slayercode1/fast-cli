@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import { logger } from './logger';
 import cors from 'cors';
 import corsOptions from './cors/waitlist';
-import { configureRoutes } from '@fast/utils';
+import { configureRoutes } from '@ghost_/fast-utils';
 import { initializeDatabase } from './src/config/database';
 import limiter from './limiter';
 import { ExampleController } from './src/resources/controller';

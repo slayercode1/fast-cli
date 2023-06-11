@@ -3,7 +3,10 @@ export declare const Post: (path: string) => (target: any, propertyKey: string) 
 export declare const Patch: (path: string) => (target: any, propertyKey: string) => void;
 export declare const Put: (path: string) => (target: any, propertyKey: string) => void;
 export declare const Delete: (path: string) => (target: any, propertyKey: string) => void;
-export declare const BodyCorps: () => any;
-export declare const Res: () => any;
-export declare const Req: () => any;
-export declare const Params: (params: string) => any;
+export declare const BodyCorps: () => MethodDecorator;
+export declare const Res: () => MethodDecorator;
+export declare const Req: () => MethodDecorator;
+export declare const Params: (params: string) => MethodDecorator;
+export declare const Cookies: (cookies: string) => MethodDecorator;
+export declare const UserReq: () => MethodDecorator;
+export declare const Headers: (headers: string) => MethodDecorator;

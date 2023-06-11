@@ -22,18 +22,15 @@ Pour installer Fast CLI, suivez les étapes suivantes :
 
 1. Assurez-vous d'avoir Node.js installé sur votre système.
 
-2. Téléchargez ou clonez ce référentiel sur votre machine locale.
-
-3. Accédez au dossier cli à l'aide de la commande suivante :
+2. Exécutez la commande suivante pour installer Fast CLI globalement :
 
 ```bash
-cd cli
+npm install -g fast-cli
 ```
-
-4. Exécutez la commande suivante pour installer Fast CLI globalement :
+ou 
 
 ```bash
-npm install -g .
+npx fast
 ```
 
 Cette commande installe Fast CLI globalement sur votre système, vous permettant de l'utiliser n'importe où dans votre terminal.

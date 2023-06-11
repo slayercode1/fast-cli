@@ -1,10 +1,14 @@
 {
-    "name": "@fast/cli",
-    "version": "1.0.0",
+    "name": "@ghost_/fast_cli",
+    "version": "1.0.1",
     "description": "",
     "main": "cli/index.js",
+    "files": [
+        "cli/"
+    ],
     "scripts": {
-        "tsc": "tsc -p tsconfig.json"
+        "tsc": "tsc -p tsconfig.json",
+        "prepublishOnly": "npm run tsc"
     },
     "bin": {
         "fast": "cli/index.js"
@@ -28,8 +32,8 @@
         "typescript": "^5.0.4"
     },
     "dependencies": {
-        "@fast-devkit/core": "file:fast-devkit-core-1.0.0.tgz",
-        "@schematic/fast": "file:schematic-fast-1.0.0.tgz",
+        "@ghost_/fast-devkit-core": "^1.0.0",
+        "@ghost_/schematic-fast": "^1.0.0",
         "commander": "^10.0.1"
     }
 }

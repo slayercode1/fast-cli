@@ -75,7 +75,7 @@ export const Delete = (path: string) => {
   };
 };
 
-export const BodyCorps = (): any => {
+export const BodyCorps = (): MethodDecorator => {
   return (target: any, propertyKey: string | symbol) => {
     const originalMethod = target[propertyKey];
 
@@ -90,7 +90,7 @@ export const BodyCorps = (): any => {
   };
 };
 
-export const Res = (): any => {
+export const Res = (): MethodDecorator => {
   return (target: any, propertyKey: string | symbol) => {
     const originalMethod = target[propertyKey];
 
@@ -104,7 +104,7 @@ export const Res = (): any => {
   };
 };
 
-export const Req = (): any => {
+export const Req = (): MethodDecorator => {
   return (target: any, propertyKey: string | symbol) => {
     const originalMethod = target[propertyKey];
 
@@ -118,7 +118,7 @@ export const Req = (): any => {
   };
 };
 
-export const Params = (params: string): any => {
+export const Params = (params: string): MethodDecorator => {
   return (target: any, propertyKey: string | symbol) => {
     const originalMethod = target[propertyKey];
 
@@ -133,6 +133,48 @@ export const Params = (params: string): any => {
   };
 };
 
-//query
-//Headers
+export const Cookies = (cookies: string): MethodDecorator => {
+  return (target: any, propertyKey: string | symbol) => {
+    const originalMethod = target[propertyKey];
+
+    target[propertyKey] = function (...arguments_: any[]) {
+      const [request] = arguments_;
+      const cookie = request.cookies[cookies];
+      arguments_.push(cookie);
+      return originalMethod.apply(this, arguments_);
+    };
+
+    return target;
+  };
+};
+
+export const UserReq = (): MethodDecorator => {
+  return (target: any, propertyKey: string | symbol) => {
+    const originalMethod = target[propertyKey];
+
+    target[propertyKey] = function (...arguments_: any[]) {
+      const [request] = arguments_;
+      const user = request.user;
+      arguments_.push(user);
+      return originalMethod.apply(this, arguments_);
+    };
+
+    return target;
+  };
+};
+
+export const Headers = (headers: string): MethodDecorator => {
+  return (target: any, propertyKey: string | symbol) => {
+    const originalMethod = target[propertyKey];
+
+    target[propertyKey] = function (...arguments_: any[]) {
+      const [request] = arguments_;
+      const header = request.headers[headers];
+      arguments_.push(header);
+      return originalMethod.apply(this, arguments_);
+    };
+
+    return target;
+  };
+};
 

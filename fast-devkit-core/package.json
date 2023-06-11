@@ -1,5 +1,5 @@
 {
-    "name": "@fast-devkit/core",
+    "name": "@ghost_/fast-devkit-core",
     "version": "1.0.0",
     "description": "",
     "main": "./lib/cjs/index.js",
@@ -31,6 +31,7 @@
         "typescript": "^5.0.4"
     },
     "dependencies": {
+        "ansi-colors": "^4.1.3",
         "shelljs": "^0.8.5"
     }
 }

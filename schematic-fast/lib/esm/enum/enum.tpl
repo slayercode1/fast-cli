@@ -1,1 +1,1 @@
-export enums {{title}} {}
+export enum {{titleEnum}} {}

@@ -114,5 +114,39 @@ export const Params = (params) => {
         return target;
     };
 };
-//query
-//Headers
+export const Cookies = (cookies) => {
+    return (target, propertyKey) => {
+        const originalMethod = target[propertyKey];
+        target[propertyKey] = function (...arguments_) {
+            const [request] = arguments_;
+            const cookie = request.cookies[cookies];
+            arguments_.push(cookie);
+            return originalMethod.apply(this, arguments_);
+        };
+        return target;
+    };
+};
+export const UserReq = () => {
+    return (target, propertyKey) => {
+        const originalMethod = target[propertyKey];
+        target[propertyKey] = function (...arguments_) {
+            const [request] = arguments_;
+            const user = request.user;
+            arguments_.push(user);
+            return originalMethod.apply(this, arguments_);
+        };
+        return target;
+    };
+};
+export const Headers = (headers) => {
+    return (target, propertyKey) => {
+        const originalMethod = target[propertyKey];
+        target[propertyKey] = function (...arguments_) {
+            const [request] = arguments_;
+            const header = request.headers[headers];
+            arguments_.push(header);
+            return originalMethod.apply(this, arguments_);
+        };
+        return target;
+    };
+};

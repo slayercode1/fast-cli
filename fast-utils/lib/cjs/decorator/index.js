@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Params = exports.Req = exports.Res = exports.BodyCorps = exports.Delete = exports.Put = exports.Patch = exports.Post = exports.Get = void 0;
+exports.Headers = exports.UserReq = exports.Cookies = exports.Params = exports.Req = exports.Res = exports.BodyCorps = exports.Delete = exports.Put = exports.Patch = exports.Post = exports.Get = void 0;
 const Get = (path) => {
     return (target, propertyKey) => {
         if (!Reflect.hasMetadata('routes', target.constructor)) {
@@ -126,5 +126,42 @@ const Params = (params) => {
     };
 };
 exports.Params = Params;
-//query
-//Headers
+const Cookies = (cookies) => {
+    return (target, propertyKey) => {
+        const originalMethod = target[propertyKey];
+        target[propertyKey] = function (...arguments_) {
+            const [request] = arguments_;
+            const cookie = request.cookies[cookies];
+            arguments_.push(cookie);
+            return originalMethod.apply(this, arguments_);
+        };
+        return target;
+    };
+};
+exports.Cookies = Cookies;
+const UserReq = () => {
+    return (target, propertyKey) => {
+        const originalMethod = target[propertyKey];
+        target[propertyKey] = function (...arguments_) {
+            const [request] = arguments_;
+            const user = request.user;
+            arguments_.push(user);
+            return originalMethod.apply(this, arguments_);
+        };
+        return target;
+    };
+};
+exports.UserReq = UserReq;
+const Headers = (headers) => {
+    return (target, propertyKey) => {
+        const originalMethod = target[propertyKey];
+        target[propertyKey] = function (...arguments_) {
+            const [request] = arguments_;
+            const header = request.headers[headers];
+            arguments_.push(header);
+            return originalMethod.apply(this, arguments_);
+        };
+        return target;
+    };
+};
+exports.Headers = Headers;

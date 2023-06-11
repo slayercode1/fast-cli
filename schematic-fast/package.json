@@ -1,5 +1,5 @@
 {
-    "name": "@schematic/fast",
+    "name": "@ghost_/schematic-fast",
     "version": "1.0.0",
     "description": "",
     "main": "./lib/cjs/index.js",
@@ -7,9 +7,6 @@
     "files": [
         "lib/"
     ],
-    "engines": {
-        "node": ">=16.0.0"
-    },
     "scripts": {
         "copy-file": "cp -r ./src/controller ./lib/cjs/controller && cp -r ./src/controller ./lib/esm/controller && cp -r ./src/entity ./lib/cjs/entity && cp -r ./src/entity ./lib/esm/entity && cp -r ./src/enum ./lib/cjs/enum && cp -r ./src/enum ./lib/esm/enum && cp -r ./src/interface ./lib/cjs/interface && cp -r ./src/interface ./lib/esm/interface && cp -r ./src/resource ./lib/cjs/resource && cp -r ./src/resource ./lib/esm/resource ",
         "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json && npm run copy-file",
@@ -19,6 +16,7 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@ghost_/fast-utils": "^1.0.0",
         "typescript": "^5.0.4"
     },
     "devDependencies": {

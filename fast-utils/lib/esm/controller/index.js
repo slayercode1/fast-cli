@@ -21,3 +21,34 @@ export const Controller = (prefix = '') => {
         }
     };
 };
+// export const JwtMiddleware = (): ClassDecorator => {
+//   return (target: any) => {
+//     Reflect.defineMetadata('middleware', jwtMiddlewareFunction, target);
+//
+//     if (!Reflect.hasMetadata('routes', target)) {
+//       Reflect.defineMetadata('routes', [], target);
+//     }
+//   };
+// };
+//Todo: a Verifier
+export const JwtMiddleware = () => {
+    return (target, propertyKey) => {
+        if (propertyKey) {
+            const routes = Reflect.getMetadata('routes', target.constructor) || [];
+            routes.push(propertyKey);
+            Reflect.defineMetadata('routes', routes, target.constructor);
+            Reflect.defineMetadata('middleware', jwtMiddlewareFunction, target, propertyKey);
+        }
+        else {
+            Reflect.defineMetadata('middleware', jwtMiddlewareFunction, target);
+            if (!Reflect.hasMetadata('routes', target)) {
+                Reflect.defineMetadata('routes', [], target);
+            }
+        }
+    };
+};
+const jwtMiddlewareFunction = (request, response, next) => {
+    // Votre logique de middleware JWT ici
+    console.log('Jwt Guard activated');
+    return next();
+};
