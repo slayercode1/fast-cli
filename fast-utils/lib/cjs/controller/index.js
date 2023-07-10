@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.JwtMiddleware = exports.Controller = exports.configureRoutes = void 0;
+exports.applyMiddleware = exports.Controller = exports.configureRoutes = void 0;
 require("reflect-metadata");
 function configureRoutes(app, controllers) {
     for (const Controller of controllers) {
@@ -26,35 +26,9 @@ const Controller = (prefix = '') => {
     };
 };
 exports.Controller = Controller;
-// export const JwtMiddleware = (): ClassDecorator => {
-//   return (target: any) => {
-//     Reflect.defineMetadata('middleware', jwtMiddlewareFunction, target);
-//
-//     if (!Reflect.hasMetadata('routes', target)) {
-//       Reflect.defineMetadata('routes', [], target);
-//     }
-//   };
-// };
-//Todo: a Verifier
-const JwtMiddleware = () => {
-    return (target, propertyKey) => {
-        if (propertyKey) {
-            const routes = Reflect.getMetadata('routes', target.constructor) || [];
-            routes.push(propertyKey);
-            Reflect.defineMetadata('routes', routes, target.constructor);
-            Reflect.defineMetadata('middleware', jwtMiddlewareFunction, target, propertyKey);
-        }
-        else {
-            Reflect.defineMetadata('middleware', jwtMiddlewareFunction, target);
-            if (!Reflect.hasMetadata('routes', target)) {
-                Reflect.defineMetadata('routes', [], target);
-            }
-        }
-    };
+const applyMiddleware = (app, middleware) => {
+    middleware.map((mw) => {
+        app.use(mw);
+    });
 };
-exports.JwtMiddleware = JwtMiddleware;
-const jwtMiddlewareFunction = (request, response, next) => {
-    // Votre logique de middleware JWT ici
-    console.log('Jwt Guard activated');
-    return next();
-};
+exports.applyMiddleware = applyMiddleware;

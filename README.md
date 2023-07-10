@@ -36,10 +36,15 @@ cd cli
 npm install -g .
 ```
 
-ou si vous voulez l'installer localement pour votre projet :
+Si vous voulez l'installer localement pour votre projet :
 
 ```bash
-npm install -g fast-cli
+npm install -g @ghost_/fast_cli
+```
+ou
+
+```bash
+ npx @ghost_/fast_cli
 ```
 
 Cette commande installe Fast CLI globalement sur votre système, vous permettant de l'utiliser n'importe où dans votre terminal.

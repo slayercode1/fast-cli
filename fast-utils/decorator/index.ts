@@ -1,7 +1,7 @@
-import { RouteDefinition } from '../Model/RouteDefinition';
+import {RouteDefinition} from '../Model/RouteDefinition';
 
-export const Get = (path: string) => {
-  return (target: any, propertyKey: string): void => {
+export const Get = (path = '') => {
+  return (target: any, propertyKey: string, descriptor: PropertyDescriptor): void => {
     if (!Reflect.hasMetadata('routes', target.constructor)) {
       Reflect.defineMetadata('routes', [], target.constructor);
     }
@@ -15,7 +15,7 @@ export const Get = (path: string) => {
   };
 };
 
-export const Post = (path: string) => {
+export const Post = (path = '') => {
   return (target: any, propertyKey: string): void => {
     if (!Reflect.hasMetadata('routes', target.constructor)) {
       Reflect.defineMetadata('routes', [], target.constructor);
@@ -75,7 +75,7 @@ export const Delete = (path: string) => {
   };
 };
 
-export const BodyCorps = (): MethodDecorator => {
+export const BodyCorps = () => {
   return (target: any, propertyKey: string | symbol) => {
     const originalMethod = target[propertyKey];
 
@@ -90,7 +90,7 @@ export const BodyCorps = (): MethodDecorator => {
   };
 };
 
-export const Res = (): MethodDecorator => {
+export const Res = () => {
   return (target: any, propertyKey: string | symbol) => {
     const originalMethod = target[propertyKey];
 
@@ -104,7 +104,7 @@ export const Res = (): MethodDecorator => {
   };
 };
 
-export const Req = (): MethodDecorator => {
+export const Req = () => {
   return (target: any, propertyKey: string | symbol) => {
     const originalMethod = target[propertyKey];
 
@@ -118,14 +118,13 @@ export const Req = (): MethodDecorator => {
   };
 };
 
-export const Params = (params: string): MethodDecorator => {
-  return (target: any, propertyKey: string | symbol) => {
+export const Params = (params: string) => {
+  return (target: any, propertyKey: string | symbol, parameterIndex: number) => {
     const originalMethod = target[propertyKey];
 
     target[propertyKey] = function (...arguments_: any[]) {
       const [request] = arguments_;
-      const param = request.params[params];
-      arguments_.push(param);
+      arguments_[parameterIndex] = request.params[params];
       return originalMethod.apply(this, arguments_);
     };
 
@@ -133,44 +132,30 @@ export const Params = (params: string): MethodDecorator => {
   };
 };
 
-export const Cookies = (cookies: string): MethodDecorator => {
+export const CookieSession = () => {
   return (target: any, propertyKey: string | symbol) => {
     const originalMethod = target[propertyKey];
 
     target[propertyKey] = function (...arguments_: any[]) {
-      const [request] = arguments_;
-      const cookie = request.cookies[cookies];
-      arguments_.push(cookie);
-      return originalMethod.apply(this, arguments_);
+      const [request, response] = arguments_;
+      const ssid = request.signedCookies.ssid;
+      return ssid ? originalMethod.apply(this, arguments_) : response.status(401).send('Not Authorized');
     };
 
     return target;
   };
 };
 
-export const UserReq = (): MethodDecorator => {
+//Todo: a test
+
+
+export const Next = () => {
   return (target: any, propertyKey: string | symbol) => {
     const originalMethod = target[propertyKey];
 
     target[propertyKey] = function (...arguments_: any[]) {
-      const [request] = arguments_;
-      const user = request.user;
-      arguments_.push(user);
-      return originalMethod.apply(this, arguments_);
-    };
-
-    return target;
-  };
-};
-
-export const Headers = (headers: string): MethodDecorator => {
-  return (target: any, propertyKey: string | symbol) => {
-    const originalMethod = target[propertyKey];
-
-    target[propertyKey] = function (...arguments_: any[]) {
-      const [request] = arguments_;
-      const header = request.headers[headers];
-      arguments_.push(header);
+      const [next] = arguments_;
+      arguments_.push(next);
       return originalMethod.apply(this, arguments_);
     };
 

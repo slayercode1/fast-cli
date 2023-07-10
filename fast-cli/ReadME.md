@@ -25,12 +25,12 @@ Pour installer Fast CLI, suivez les étapes suivantes :
 2. Exécutez la commande suivante pour installer Fast CLI globalement :
 
 ```bash
-npm install -g fast-cli
+npm install -g @ghost_/fast_cli
 ```
 ou 
 
 ```bash
-npx fast
+ npx @ghost_/fast_cli
 ```
 
 Cette commande installe Fast CLI globalement sur votre système, vous permettant de l'utiliser n'importe où dans votre terminal.

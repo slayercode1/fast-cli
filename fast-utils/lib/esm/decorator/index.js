@@ -103,17 +103,17 @@ export const Req = () => {
     };
 };
 export const Params = (params) => {
-    return (target, propertyKey) => {
+    return (target, propertyKey, parameterIndex) => {
         const originalMethod = target[propertyKey];
         target[propertyKey] = function (...arguments_) {
             const [request] = arguments_;
-            const param = request.params[params];
-            arguments_.push(param);
+            arguments_[parameterIndex] = request.params[params];
             return originalMethod.apply(this, arguments_);
         };
         return target;
     };
 };
+//Todo: a test
 export const Cookies = (cookies) => {
     return (target, propertyKey) => {
         const originalMethod = target[propertyKey];
@@ -145,6 +145,17 @@ export const Headers = (headers) => {
             const [request] = arguments_;
             const header = request.headers[headers];
             arguments_.push(header);
+            return originalMethod.apply(this, arguments_);
+        };
+        return target;
+    };
+};
+export const Next = () => {
+    return (target, propertyKey) => {
+        const originalMethod = target[propertyKey];
+        target[propertyKey] = function (...arguments_) {
+            const [next] = arguments_;
+            arguments_.push(next);
             return originalMethod.apply(this, arguments_);
         };
         return target;

@@ -18,6 +18,10 @@
         "cli",
         "exprss"
     ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/slayercode1/fast-cli.git"
+    },
     "author": "Ghost",
     "license": "ISC",
     "devDependencies": {
